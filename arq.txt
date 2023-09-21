@@ -1,0 +1,3 @@
+Push;10x5;50Kg
+Sit;20x50;88Kg
+Dip;10x88;99Kg

@@ -1,0 +1,20 @@
+body {
+    background-color: black;
+    color: white;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: rgb(98, 0, 210);
+}
+td, tr {
+    background-color: rgb(8, 8, 8);
+    padding: 10px;
+}
+td, th {
+    background-color: rgb(8, 8, 8);
+    border: solid;
+    border-color: rgb(98, 0, 210);
+}
