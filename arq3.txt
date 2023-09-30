@@ -1,2 +1,3 @@
-1;Chris;Cliente;c@gmail;154894;179;65;21
-1;Chris;Cliente;c@gmail;154894;179;65;21
+1;Chris;Personal;adm;154894;179;65;21
+3;Vito;Cliente;victor@gmail.com;1234567;170;80;21
+4;Eric;Cliente;eric@gmail.com;1234567;170;65;21
