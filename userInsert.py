@@ -1,20 +1,21 @@
-with open("arq3.txt", 'r') as x:
-    cont = len(x.readlines())
-x.close()
+def userInsert(name, role, email, password, height, weight, age):
+    with open("arq3.txt", 'r') as x:
+        cont = len(x.readlines())
+    x.close()
 
-infos = ""
+    lines = open("arq3.txt", 'r')
+    lines = lines.readlines()
 
-name = "Vito"
-role = "Cliente"
-email = "c@gmail"
-password = "154894"
-height = "179"
-weight = "65"
-age = "21"
+    for i in lines:
+        if email in i:
+            print("O usuário deste email ja está cadastrado!")
+            exit()
 
-infos = str(cont+1)+";"+name+";"+role+";"+email+";"+password+";"+height+";"+weight+";"+age+"\n"
+    infos = ""
 
-print(infos)
+    infos = str(cont)+";"+name+";"+role+";"+email+";"+password+";"+height+";"+weight+";"+age+"\n"
 
-arq = open("arq3.txt", "a")
-arq.write(infos)
+    print(infos)
+
+    arq = open("arq3.txt", "a")
+    arq.write(infos)

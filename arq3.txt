@@ -1,3 +1,9 @@
-1;Chris;Personal;adm;154894;179;65;21
-3;Vito;Cliente;victor@gmail.com;1234567;170;80;21
-4;Eric;Cliente;eric@gmail.com;1234567;170;65;21
+Nome;Role;Email;Password,Height;Weight;Age
+1;Vito;Cliente;c@gmail;154894;179;65;21
+2;Chris;Cliente;ch@gmail;194894;179;65;21
+
+4;Chris;Cliente;chssr@gmail;194894;179;65;21
+5;Chris;Clisente;chssssr@gmail;194894;179;65;21
+6;Chris;Clisente;chssssssr@gmail;194894;179;65;21
+7;Chris;Clisente;csahssssssr@gmail;194894;179;65;21
+8;C;D;Y@;15SD8;147;96;18
