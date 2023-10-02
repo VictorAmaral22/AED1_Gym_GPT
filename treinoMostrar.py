@@ -13,7 +13,7 @@ def createHTML():
 
     content += '''<thead>
     <th>Exericio</td>
-    <th>Repeticoes</td>
+    <th>Repetições</td>
     <th>Carga</td>
     </thead>\n'''
 

@@ -1,9 +1,9 @@
 def userInsert(name, role, email, password, height, weight, age):
-    with open("arq3.txt", 'r') as x:
+    with open("users.csv", 'r') as x:
         cont = len(x.readlines())
     x.close()
 
-    lines = open("arq3.txt", 'r')
+    lines = open("users.csv", 'r')
     lines = lines.readlines()
 
     for i in lines:
@@ -17,5 +17,5 @@ def userInsert(name, role, email, password, height, weight, age):
 
     print(infos)
 
-    arq = open("arq3.txt", "a")
+    arq = open("users.csv", "a")
     arq.write(infos)

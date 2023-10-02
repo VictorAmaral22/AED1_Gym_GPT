@@ -23,6 +23,7 @@ def LoginPersonal (win, winW, winH, page, leavePage):
             loginPersonal = checkClick(mouseclick, buttonLoginPersonal[2])
             pageNew = page
             tmpLeavePage = leavePage
+            userLogged = False
 
             if loginPersonal:
 
@@ -31,6 +32,7 @@ def LoginPersonal (win, winW, winH, page, leavePage):
                     undraw()
                     pageNew = "home-personal"
                     tmpLeavePage = True
+                    userLogged = login
                 else:
                     warning.draw(win)                
             
@@ -39,7 +41,7 @@ def LoginPersonal (win, winW, winH, page, leavePage):
                 pageNew = "initial"
                 tmpLeavePage = True
             
-            return [pageNew, tmpLeavePage]
+            return [pageNew, tmpLeavePage, userLogged]
 
     return [
         interactions,

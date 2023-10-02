@@ -1,5 +1,5 @@
 def treinoInsert(email):
-    arq = open("arq3.txt", 'r')
+    arq = open("users.csv", 'r')
     arq2 = open("arq2.txt", 'r')
     lines2 = arq2.readlines()
     lines = arq.readlines()

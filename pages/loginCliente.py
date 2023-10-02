@@ -23,6 +23,7 @@ def LoginCliente (win, winW, winH, page, leavePage):
             loginCliente = checkClick(mouseclick, buttonLoginCliente[2])
             pageNew = page
             tmpLeavePage = leavePage
+            userLogged = False
 
             if loginCliente:
 
@@ -31,6 +32,7 @@ def LoginCliente (win, winW, winH, page, leavePage):
                     undraw()
                     pageNew = "home-cliente"
                     tmpLeavePage = True
+                    userLogged = login
                 else:
                     warning.draw(win)                
             
@@ -39,7 +41,7 @@ def LoginCliente (win, winW, winH, page, leavePage):
                 pageNew = "initial"
                 tmpLeavePage = True
             
-            return [pageNew, tmpLeavePage]
+            return [pageNew, tmpLeavePage, userLogged]
 
     return [
         interactions,

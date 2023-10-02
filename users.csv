@@ -1,3 +1,9 @@
-id;nome;role;email;senha
-1;Vitão do Suco;Personal;vitao.suco@gmail.com;v1234567
-5;Christian Sheipado;Cliente;chris.sheipado@gmail.com;c1234567
+Nome;Role;Email;Password,Height;Weight;Age
+9;adm;Personal;adm;1234567;170;100;50
+1;Vito;Cliente;c@gmail;123456;179;65;21
+2;Chris;Cliente;ch@gmail;194894;179;65;21
+4;Chris;Cliente;chssr@gmail;194894;179;65;21
+5;Chris;Clisente;chssssr@gmail;194894;179;65;21
+6;Chris;Clisente;chssssssr@gmail;194894;179;65;21
+7;Chris;Clisente;csahssssssr@gmail;194894;179;65;21
+8;C;D;Y@;15SD8;147;96;18

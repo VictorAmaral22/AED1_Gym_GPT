@@ -1,6 +1,6 @@
 def treinoSearch(email):
     arq = open("arq2.txt", "r")
-    arq3 = open("arq3.txt", "r")
+    arq3 = open("users.csv", "r")
     lines = arq.readlines()
     lines3 = arq3.readlines()
 
