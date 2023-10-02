@@ -10,30 +10,33 @@ def InitialPage (win, winW, winH, page, leavePage):
         buttonLoginCliente[3]()
         buttonSair[3]()
 
-    def draw ():
-        buttonLoginPersonal[3]()
-        buttonLoginCliente[3]()
-        buttonSair[3]()
-
-    def interactions(keypressed, mouseclick):
+    def interactions(mouseclick):
         if mouseclick:
             exit = checkClick(mouseclick, buttonSair[2])
             loginPersonal = checkClick(mouseclick, buttonLoginPersonal[2])
             loginCliente = checkClick(mouseclick, buttonLoginCliente[2])
+            pageNew = page
+            tmpLeavePage = leavePage
 
             if loginPersonal:
                 undraw()
-                page = "login-personal"
-                leavePage = True
+                pageNew = "login-personal"
+                tmpLeavePage = True
 
-
-            # print(exit)
-            # print(loginPersonal)
-            # print(loginCliente)
+            if loginCliente:
+                undraw()
+                pageNew = "login-cliente"
+                tmpLeavePage = True
+            
+            if exit:
+                undraw()
+                pageNew = "exit"
+                tmpLeavePage = True
+            
+            return [pageNew, tmpLeavePage]
 
     return [
         interactions,
         undraw,
-        draw,
     ]
         

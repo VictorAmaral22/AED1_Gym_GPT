@@ -31,44 +31,38 @@ def renderButton (win, posW, posH, title):
         draw
     ]
 
-def renderInput (win, posW, posH, label):
-    inputW = 150
-    inputH = 30
-    input = Rectangle(Point(posW-inputW, posH-inputH), Point(posW+inputW, posH+inputH))
+def renderInput (win, posW, posH, inputW=20, fontSize=20):
+    input = Entry(Point(posW, posH), inputW)
     input.draw(win)
     input.setFill("#fff")
-    inputContent = Text(input.getCenter(), "")
-    inputContent.setFill("#000")
-    inputContent.draw(win)
+    input.setSize(fontSize)
 
-    inputLabel = Text(Point(input.getP1().x+20, input.getP1().y-20), label)
-    inputLabel.setFill("#fff")
-    inputLabel.draw(win)
+    print(input.getAnchor())
 
-    p1 = input.getP1()
-    p2 = input.getP2()
+    # inputLabel = Text(Point(input.getAnchor().x+20, input.getP1().y-20), label)
+    # inputLabel.setFill("#fff")
+    # inputLabel.draw(win)
 
-    corners = [p1, p2]
+    # p1 = input.getP1()
+    # p2 = input.getP2()
+
+    corners = []
 
     def undraw ():
         input.undraw()
-        inputContent.undraw()
-        inputLabel.undraw()
 
     def draw ():
         input.draw(win)
-        inputContent.draw(win)
 
-    def changeTxt (txt):
-        inputContent.setText(txt)
+    # def changeTxt (txt):
+        # inputContent.setText(txt)
 
     return [
         input,
-        inputContent,
         corners,
         undraw,
         draw,
-        changeTxt
+        # changeTxt
     ]
 
 def checkClick(posClick, bbox):
@@ -76,24 +70,6 @@ def checkClick(posClick, bbox):
         return True
     else:
         return False
-
-def handleTyping (keyPressed, text):
-    if keyPressed == "space":
-        text += " "
-    if keyPressed == "BackSpace":
-        text = text[:-1]
-    if keyPressed == "at":
-        text += "@"
-    if keyPressed == "period":
-        text += "."
-    if keyPressed == "comma":
-        text += ","
-    if keyPressed == "ccedilla":
-        text += "ç"
-    if keyPressed in "abcdefghijklmnopqrstuvwxyz1234567890":
-        text += keyPressed
-
-    return text
 
 def renderImage (win, posW, posH, imagePath):
     image = Image(Point(posW, posH), imagePath)
