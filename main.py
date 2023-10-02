@@ -1,38 +1,91 @@
-name = "Vito"
-age = "21"
-height = "174"
-weight = "85"
-password = "1234"
+from graphics import *
+from pages.initialPage import InitialPage
+from pages.loginPersonal import LoginPersonal
+from pages.loginCliente import LoginCliente
+from pages.homeCliente import HomeCliente
+from pages.criarConta import CriarConta
 
-infos = name+";"+age+";"+height+";"+weight+";"
+winW = 1000
+winH = 800
 
-treino = "Workout: "
+win = GraphWin("Gym Rats", winW, winH)
+win.setBackground("#000")
 
-workout = {
-    "Dia 1": ['Peito','Ombros','Triceps'],
-    "Dia 2": ['Costas', 'Biceps'],
-    "Dia 3": ['Pernas'],
-    "Dia 4": ['Descanso']
-}
+exit = False
+loggedUser = False
 
-treino += "Dia 1: "
+page = "initial"
 
-for i in workout['Dia 1']:
-     treino += i+" "
-treino += "| Dia 2: "
-for i in workout['Dia 2']:
-     treino += i+" "
-treino += "| Dia 3: "
-for i in workout['Dia 3']:
-     treino += i+" "
-treino += "| Dia 4: "
-for i in workout['Dia 4']:
-     treino += i+" "
-treino += "\n"
+while not exit:
+    if win.closed:
+        break
+    
+    # print(page)
+    # print(loggedUser)
 
-data = infos + treino
+    if page == "exit":
+        exit = True
 
-print(data)
+    if page == "initial":
+        leavePage = False
+        returnedRender = InitialPage(win, winW, winH, page, leavePage)
+        while not leavePage:
+            mouseClick = win.checkMouse()
+            tmp = returnedRender[0](mouseClick)
+            if tmp:
+                leavePage = tmp[1]
+                page = tmp[0]
 
-# arq = open("arq.txt", "a")
-# arq.write(data)
+    if page == "login-personal":
+        leavePage = False
+        returnedRender = LoginPersonal(win, winW, winH, page, leavePage)
+        while not leavePage:
+            mouseClick = win.checkMouse()
+            tmp = returnedRender[0](mouseClick)
+            if tmp:
+                leavePage = tmp[1]
+                page = tmp[0]
+                if tmp[2]:
+                    loggedUser = tmp[2]
+
+    if page == "login-cliente":
+        leavePage = False
+        returnedRender = LoginCliente(win, winW, winH, page, leavePage)
+        while not leavePage:
+            mouseClick = win.checkMouse()
+            tmp = returnedRender[0](mouseClick)
+            if tmp:
+                leavePage = tmp[1]
+                page = tmp[0]
+                if tmp[2]:
+                    loggedUser = tmp[2]
+    
+    if page == "criar-conta":
+        leavePage = False
+        returnedRender = CriarConta(win, winW, winH, page, leavePage)
+        while not leavePage:
+            mouseClick = win.checkMouse()
+            tmp = returnedRender[0](mouseClick)
+            if tmp:
+                leavePage = tmp[1]
+                page = tmp[0]
+
+    if page == "home-cliente":
+        leavePage = False
+        returnedRender = HomeCliente(win, winW, winH, loggedUser, page, leavePage)
+        while not leavePage:
+            mouseClick = win.checkMouse()
+            tmp = returnedRender[0](mouseClick)
+            if tmp:
+                leavePage = tmp[1]
+                page = tmp[0]
+    
+    if page == "home-personal":
+        leavePage = False
+        returnedRender = HomeCliente(win, winW, winH, loggedUser, page, leavePage)
+        while not leavePage:
+            mouseClick = win.checkMouse()
+            tmp = returnedRender[0](mouseClick)
+            if tmp:
+                leavePage = tmp[1]
+                page = tmp[0]

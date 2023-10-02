@@ -5,17 +5,17 @@ def userInsert(name, role, email, password, height, weight, age):
 
     lines = open("users.csv", 'r')
     lines = lines.readlines()
+    validate = True
 
     for i in lines:
         if email in i:
-            print("O usuário deste email ja está cadastrado!")
-            exit()
+            validate = False
 
-    infos = ""
+    if validate:
+        infos = ""
+        infos = str(cont)+";"+name+";"+role+";"+email+";"+password+";"+height+";"+weight+";"+age+"\n"
+        validate = cont
+        arq = open("users.csv", "a")
+        arq.write(infos)
 
-    infos = str(cont)+";"+name+";"+role+";"+email+";"+password+";"+height+";"+weight+";"+age+"\n"
-
-    print(infos)
-
-    arq = open("users.csv", "a")
-    arq.write(infos)
+    return validate

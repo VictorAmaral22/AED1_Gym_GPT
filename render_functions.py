@@ -31,19 +31,24 @@ def renderButton (win, posW, posH, title):
         draw
     ]
 
-def renderInput (win, posW, posH, inputW=20, fontSize=20):
+def renderInput (win, posW, posH, inputW=20, fontSize=20, label="Insira um texto"):
     input = Entry(Point(posW, posH), inputW)
     input.draw(win)
     input.setFill("#fff")
     input.setSize(fontSize)
+    txt = Text(Point(posW, posH-30), label)
+    txt.setFill("#fff")
+    txt.draw(win)
 
     corners = []
 
     def undraw ():
         input.undraw()
+        txt.undraw()
 
     def draw ():
         input.draw(win)
+        txt.draw(win)
 
     return [
         input,

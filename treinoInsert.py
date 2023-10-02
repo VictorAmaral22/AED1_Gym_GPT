@@ -1,6 +1,6 @@
 def treinoInsert(email):
     arq = open("users.csv", 'r')
-    arq2 = open("arq2.txt", 'r')
+    arq2 = open("treinosAluno.csv", 'r')
     lines2 = arq2.readlines()
     lines = arq.readlines()
 
@@ -34,5 +34,5 @@ def treinoInsert(email):
 
     print(insert)
 
-    arq2 = open("arq2.txt", "a")
+    arq2 = open("treinosAluno.csv", "a")
     arq2.write(insert+"\n")

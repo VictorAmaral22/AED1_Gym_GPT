@@ -1,5 +1,5 @@
 def update(email):
-    arq = open("arq2.txt", "r")
+    arq = open("treinosAluno.csv", "r")
     arq3 = open("users.csv", "r")
     lines3 = arq3.readlines()
     lines = arq.readlines()
@@ -20,7 +20,7 @@ def update(email):
     cont = 0
 
     for i in lines:
-        if ("ID_"+id) in i:
+        if id in i:
             print(i)
             break
         cont += 1
@@ -28,7 +28,7 @@ def update(email):
 
     del lines[cont]
 
-    new_arq = open("arq2.txt", "w+")
+    new_arq = open("treinosAluno.csv", "w+")
 
     for line in lines:
         new_arq.write(line)
@@ -49,7 +49,7 @@ def update(email):
 
     print(insert)
 
-    arq2 = open("arq2.txt", "a")
+    arq2 = open("treinosAluno.csv", "a")
     arq2.write(insert+"\n")
 
     new_arq.close()

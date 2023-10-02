@@ -1,41 +1,28 @@
-def treinoSearch(email):
-    arq = open("arq2.txt", "r")
-    arq3 = open("users.csv", "r")
-    lines = arq.readlines()
-    lines3 = arq3.readlines()
+def treinoSearch(idUser):
+    treinos = open("treinos.csv", "r")
+    treinos.readline()
+    treinosList = treinos.readlines()
 
-    id = ""
-            
-    for profiles in lines3:
-        if email in profiles:
-            for word in profiles:
-                if word == ';':
-                    break
-                id += word
-    
-    if id == "":
-        print("Usuário não encontrado.") 
-        exit()       
+    ficha = []
+    for exerc in treinosList:
+        formated = exerc.split(";")
 
-    for i in lines:
-        if ("ID_"+id) in i:
-            find = i
-
-    for i in lines:
-        if find in i:    
-            temp = i.split(";")
-            del temp[0]
-
-    cont = 1
+        if formated[0] == str(idUser):
+            formated[-1] = "".join(formated[-1].split("\n"))
+            ficha.append(formated)
 
     new = ""
 
-    for i in temp:
-        new += i+";"
-        if cont%3 == 0 and cont != len(temp):
-            new = new.rstrip(new[-1])
-            new += "\n"
-        cont+=1
+    for i in ficha:
+        new += ";".join(i)+"\n"
             
-    workout = open("arq.txt", "w")
-    workout.write(new.rstrip(new[-1]))
+    workout = open("ficha.csv", "w")
+    workout.write(new)
+
+    if new != "":
+        return True
+    else: 
+        return False
+        
+
+# treinoSearch(2)
