@@ -1,43 +1,45 @@
 from render_functions import renderButton, checkClick, renderInput, renderImage
+from verifyLogin import VerifyLogin
+from graphics import Text, Point
 
 def LoginCliente (win, winW, winH, page, leavePage):
-    inputEmail = renderInput (win, winW/2, winH/2-50, 17, 23)
-    inputSenha = renderInput (win, winW/2, winH/2, 17, 23)
-    buttonLoginPersonal = renderButton(win, winW/2, winH/2+80, "Entrar como Cliente")
-    returnButton = renderImage (win, 30, 30, "arrow-left.png")
+    inputEmail = renderInput (win, winW/2, winH/2-50, 20, 20)
+    inputSenha = renderInput (win, winW/2, winH/2, 20, 20)
+    buttonLoginCliente = renderButton(win, winW/2, winH/2+80, "Entrar como Cliente")
+    buttonReturn = renderImage(win, 30, 30, "arrow-left.png")
+    warning = Text(Point(winW/2, winH/2+200), "Credenciais inválidas")
+    warning.setFill("red")
 
     def undraw ():
-        print("undraw")
-        inputEmail[3]()
-        inputSenha[3]()
-        buttonLoginPersonal[3]()
+        inputEmail[2]()
+        inputSenha[2]()
+        buttonLoginCliente[3]()
+        buttonReturn[2]()
+        warning.undraw()
 
     def interactions(mouseclick):
-        i = 1
-        # print("interactions")
-        # if mouseclick:
-            # exit = checkClick(mouseclick, buttonSair[2])
-            # loginPersonal = checkClick(mouseclick, buttonLoginPersonal[2])
-            # loginCliente = checkClick(mouseclick, buttonLoginCliente[2])
-            # pageNew = page
-            # tmpLeavePage = leavePage
+        if mouseclick:
+            exit = checkClick(mouseclick, buttonReturn[1])
+            loginCliente = checkClick(mouseclick, buttonLoginCliente[2])
+            pageNew = page
+            tmpLeavePage = leavePage
 
-            # if loginPersonal:
-            #     undraw()
-            #     pageNew = "login-personal"
-            #     tmpLeavePage = True
+            if loginCliente:
 
-            # if loginCliente:
-            #     undraw()
-            #     pageNew = "login-cliente"
-            #     tmpLeavePage = True
+                login = VerifyLogin(inputEmail[0].getText(), inputSenha[0].getText(), "Cliente")
+                if login:
+                    undraw()
+                    pageNew = "home-cliente"
+                    tmpLeavePage = True
+                else:
+                    warning.draw(win)                
             
-            # if exit:
-            #     undraw()
-            #     pageNew = "exit"
-            #     tmpLeavePage = True
+            if exit:
+                undraw()
+                pageNew = "initial"
+                tmpLeavePage = True
             
-            # return [pageNew, tmpLeavePage]
+            return [pageNew, tmpLeavePage]
 
     return [
         interactions,

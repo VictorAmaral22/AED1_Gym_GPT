@@ -37,15 +37,6 @@ def renderInput (win, posW, posH, inputW=20, fontSize=20):
     input.setFill("#fff")
     input.setSize(fontSize)
 
-    print(input.getAnchor())
-
-    # inputLabel = Text(Point(input.getAnchor().x+20, input.getP1().y-20), label)
-    # inputLabel.setFill("#fff")
-    # inputLabel.draw(win)
-
-    # p1 = input.getP1()
-    # p2 = input.getP2()
-
     corners = []
 
     def undraw ():
@@ -54,15 +45,11 @@ def renderInput (win, posW, posH, inputW=20, fontSize=20):
     def draw ():
         input.draw(win)
 
-    # def changeTxt (txt):
-        # inputContent.setText(txt)
-
     return [
         input,
         corners,
         undraw,
         draw,
-        # changeTxt
     ]
 
 def checkClick(posClick, bbox):
@@ -73,10 +60,17 @@ def checkClick(posClick, bbox):
 
 def renderImage (win, posW, posH, imagePath):
     image = Image(Point(posW, posH), imagePath)
+
+    imgWidth = image.getWidth()
+    imgHeight = image.getWidth()
+    imgAnchor = image.getAnchor()
     
     image.draw(win)
 
-    corners = []
+    corners = [
+        Point(imgAnchor.x - imgWidth/2, imgAnchor.y - imgHeight/2),
+        Point(imgAnchor.x + imgWidth/2, imgAnchor.y + imgHeight/2)
+    ]
 
     def undraw ():
         image.undraw()

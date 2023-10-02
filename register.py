@@ -1,6 +1,7 @@
 from graphics import *
 from pages.initialPage import InitialPage
 from pages.loginPersonal import LoginPersonal
+from pages.loginCliente import LoginCliente
 
 winW = 1000
 winH = 800
@@ -50,7 +51,7 @@ while not exit:
 
     if page == "login-cliente":
         leavePage = False
-        returnedRender = LoginPersonal(win, winW, winH, page, leavePage)
+        returnedRender = LoginCliente(win, winW, winH, page, leavePage)
         while not leavePage:
             mouseClick = win.checkMouse()
             tmp = returnedRender[0](mouseClick)
