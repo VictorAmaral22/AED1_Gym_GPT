@@ -202,3 +202,11 @@ def update(email):
     arq2.write(insert+"\n")
 
     new_arq.close()
+
+def getRoutineExercises (day):
+    # dar = "A", "B" ou "C"
+    arq = open("lista-exercicios.xlsx", "a")
+    lines = arq.readlines()
+    print(lines[0])
+
+# getRoutineExercises("A")
