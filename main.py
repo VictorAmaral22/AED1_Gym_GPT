@@ -2,11 +2,12 @@ from graphics import *
 from pages.initialPage import InitialPage
 from pages.loginPersonal import LoginPersonal
 from pages.loginCliente import LoginCliente
-from pages.homeCliente import HomeCliente
 from pages.criarConta import CriarConta
+from pages.homeCliente import HomeCliente
+from pages.homePersonal import HomePersonal
 
-winW = 1000
-winH = 800
+winW = 1920
+winH = 1000
 
 win = GraphWin("Gym Rats", winW, winH)
 win.setBackground("#000")
@@ -82,7 +83,7 @@ while not exit:
     
     if page == "home-personal":
         leavePage = False
-        returnedRender = HomeCliente(win, winW, winH, loggedUser, page, leavePage)
+        returnedRender = HomePersonal(win, winW, winH, loggedUser, page, leavePage)
         while not leavePage:
             mouseClick = win.checkMouse()
             tmp = returnedRender[0](mouseClick)

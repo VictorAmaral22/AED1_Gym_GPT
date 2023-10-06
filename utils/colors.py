@@ -1,0 +1,6 @@
+darkBlue1 = "#03045E"
+darkBlue2 = "#0077B6"
+midBlue1 = "#00B4D8"
+lightBlue1 = "#90E0EF"
+lightBlue2 = "#CAF0F8"
+white = "#fff"

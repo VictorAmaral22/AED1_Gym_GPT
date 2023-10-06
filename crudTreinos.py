@@ -1,8 +1,9 @@
 import webbrowser
 import os
+from utils import csvLinesFormatter
 
 def treinoInsert(email):
-    arq = open("users.csv", 'r')
+    arq = open("./data/users.csv", 'r')
     arq2 = open("treinosAluno.csv", 'r')
     lines2 = arq2.readlines()
     lines = arq.readlines()
@@ -41,7 +42,7 @@ def treinoInsert(email):
     arq2.write(insert+"\n")
 
 def createHTML():
-    arq = open("ficha.csv", "r")
+    arq = open("./data/ficha.csv", "r")
     ficha = arq.readlines()
     treinoA = []
     treinoB = []
@@ -122,7 +123,7 @@ def createHTML():
     webbrowser.open('file://' + os.path.realpath("index.html"))
 
 def treinoSearch(idUser):
-    treinos = open("treinos.csv", "r")
+    treinos = open("./data/treinos.csv", "r")
     treinos.readline()
     treinosList = treinos.readlines()
 
@@ -139,7 +140,7 @@ def treinoSearch(idUser):
     for i in ficha:
         new += ";".join(i)+"\n"
             
-    workout = open("ficha.csv", "w")
+    workout = open("./data/ficha.csv", "w")
     workout.write(new)
 
     if new != "":
@@ -149,7 +150,7 @@ def treinoSearch(idUser):
     
 def update(email):
     arq = open("treinosAluno.csv", "r")
-    arq3 = open("users.csv", "r")
+    arq3 = open("./data/users.csv", "r")
     lines3 = arq3.readlines()
     lines = arq.readlines()
 
@@ -204,9 +205,17 @@ def update(email):
     new_arq.close()
 
 def getRoutineExercises (day):
-    # dar = "A", "B" ou "C"
-    arq = open("lista-exercicios.xlsx", "a")
-    lines = arq.readlines()
-    print(lines[0])
+    # day = "A", "B" ou "C"
+    arq = open("./data/lista-exercicios.csv", "r")
+    arq.readline()
+    lines = csvLinesFormatter(arq.readlines())
+
+    exercises = []
+
+    for exerc in lines:
+        if exerc[2] == day:
+            exercises.append(exerc)
+
+    return exercises
 
 # getRoutineExercises("A")

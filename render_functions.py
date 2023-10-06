@@ -1,13 +1,18 @@
 from graphics import *
 
-def renderButton (win, posW, posH, title):
+def renderButton (win, posW, posH, title, bgColor="#001d3d", txtColor="#fff", outline=False):
     buttonW = 150
     buttonH = 40
     button = Rectangle(Point(posW-buttonW, posH-buttonH), Point(posW+buttonW, posH+buttonH))
+    button.setFill(bgColor)
+    
+    if outline:
+        button.setOutline(outline)
+
     button.draw(win)
-    button.setFill("#001d3d")
     buttonTitle = Text(button.getCenter(), title)
-    buttonTitle.setFill("#fff")
+    buttonTitle.setStyle("bold")
+    buttonTitle.setFill(txtColor)
     buttonTitle.draw(win)
 
     p1 = button.getP1()
@@ -31,13 +36,13 @@ def renderButton (win, posW, posH, title):
         draw
     ]
 
-def renderInput (win, posW, posH, inputW=20, fontSize=20, label="Insira um texto"):
+def renderInput (win, posW, posH, inputW=20, fontSize=20, label="Insira um texto", inputFill="#fff", txtColor="#fff"):
     input = Entry(Point(posW, posH), inputW)
     input.draw(win)
-    input.setFill("#fff")
+    input.setFill(inputFill)
     input.setSize(fontSize)
     txt = Text(Point(posW, posH-30), label)
-    txt.setFill("#fff")
+    txt.setFill(txtColor)
     txt.draw(win)
 
     corners = []

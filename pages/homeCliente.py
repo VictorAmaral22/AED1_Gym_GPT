@@ -5,7 +5,7 @@ from graphics import Text, Point
 
 def HomeCliente (win, winW, winH, idUser, page, leavePage):
     buttonGenWorkout = renderButton(win, winW/2, winH/2, "Mostrar ficha de treino")
-    buttonReturn = renderImage(win, 30, 30, "arrow-left.png")
+    buttonReturn = renderImage(win, 30, 30, "./assets/arrow-left.png")
     warning = Text(Point(winW/2, winH/2+200), "Você ainda não tem uma ficha de treino")
     warning.setFill("red")
 

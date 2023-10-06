@@ -1,0 +1,53 @@
+id;nome;treino_ABC;musculo
+1;Supino Reto com Barra;A;Peito
+2;Supino Reto com Halteres;A;Peito
+3;Supino Inclinado com Barra;A;Peito
+4;Supino Inclinado com Halteres;A;Peito
+5;Flexão;A;Peito
+6;Crossover;A;Peito
+7;Crucifixo com Halteres;A;Peito
+8;Tríceps Corda;A;Tríceps
+9;Tríceps Paralela;A;Tríceps
+10;Tríceps Testa na Polia;A;Tríceps
+11;Tríceps Testa com Barra;A;Tríceps
+12;Tríceps Francês;A;Tríceps
+13;Desenvolvimento com Halteres;A;Ombros
+14;Desenvolvimento na Polia;A;Ombros
+15;Elevação Lateral com Halteres;A;Ombros
+16;Elevação Lateral na Polia;A;Ombros
+17;Elevação Frontal com Halteres;A;Ombros
+18;Elevação Frontal na Polia;A;Ombros
+19;Crucifixo Inverso na Polia;A;Ombros
+20;Crucifixo Inverso com Halteres;A;Ombros
+21;Barra Fixa Pronada;B;Costas
+22;Barra Fixa Supinada;B;Costas
+23;Remada Baixa;B;Costas
+24;Remada Curvada;B;Costas
+25;Puxada Alta na Polia Pronada;B;Costas
+26;Puxada Alta na Polia Supinada;B;Costas
+27;Puxada Alta na Máquina Pronada;B;Costas
+28;Puxada Alta na Máquina Supinada;B;Costas
+29;Remada Cerrote;B;Costas
+30;Levantamento Terra;B;Costas
+31;Rosca Alternada com Halteres;B;Bíceps
+32;Rosca Martelo com Halteres;B;Bíceps
+33;Rosca Bí­ceps com Corda;B;Bíceps
+34;Rosca Bí­ceps com Barra na Polia;B;Bíceps
+35;Rosca Bí­ceps com Barra W;B;Bíceps
+36;Rosca 21 com Barra W;B;Bíceps
+37;Abdominais;B;Abdômen
+38;Prancha Abdominal;B;Abdômen
+39;Leg Press;C;Pernas
+40;Agachamento Livre;C;Pernas
+41;Agachamento Hack;C;Pernas
+42;Passada;C;Pernas
+43;Agachamento Búlgaro;C;Pernas
+44;Cadeira Extensora;C;Pernas
+45;Cadeira Flexora;C;Pernas
+46;Mesa Flexora;C;Pernas
+47;Stiff;C;Pernas
+48;Abdutor Máquina;C;Pernas
+49;Adutor Máquina;C;Pernas
+50;Agachamento Sem Peso;C;Pernas
+51;Panturrilha em Pé;C;Pernas
+52;Panturrilha Sentado;C;Pernas
