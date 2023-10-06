@@ -11,7 +11,7 @@ def CriarConta (win, winW, winH, page, leavePage):
     inputIdade = renderInput (win, winW/2, winH/2+100, 20, 20, "Idade")
     buttonCriar = renderButton(win, winW/2, winH/2+250, "Cadastrar")
 
-    buttonReturn = renderImage(win, 30, 30, "./assets/arrow-left.png")
+    buttonReturn = renderImage(win, 30, 40, "./assets/arrow-left.png")
     warning = Text(Point(winW/2, winH/2+170), "Valores errados")
     warning.setFill("red")
 

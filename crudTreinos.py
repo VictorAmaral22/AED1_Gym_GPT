@@ -217,5 +217,3 @@ def getRoutineExercises (day):
             exercises.append(exerc)
 
     return exercises
-
-# getRoutineExercises("A")

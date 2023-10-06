@@ -62,5 +62,18 @@ def getUsersWithNoWorkouts ():
             if not hasWorkout:
                 usersList.append(user)
 
-    # print(usersList)
     return usersList
+
+def getUser (id):
+    usersArq = open("./data/users.csv", "r")
+    usersArq.readline()
+    users = csvLinesFormatter(usersArq.readlines())
+
+    userData = False
+
+    for user in users:
+        if user[0] == id:
+            userData = user
+            break
+
+    return userData

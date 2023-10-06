@@ -8,7 +8,7 @@ def LoginCliente (win, winW, winH, page, leavePage):
     inputEmail = renderInput (win, winW-250, winH/2-70, 20, 20, "Email", "#fff", "#000")
     inputSenha = renderInput (win, winW-250, winH/2, 20, 20, "Senha", "#fff", "#000")
     buttonLoginCliente = renderButton(win, winW-250, winH/2+80, "Entrar como Cliente", "#00B4D8", "#fff", "#fff")
-    buttonReturn = renderImage(win, 30, 30, "./assets/arrow-left.png")
+    buttonReturn = renderImage(win, 30, 40, "./assets/arrow-left.png")
     warning = Text(Point(winW-250, winH/2+200), "Credenciais inválidas")
     warning.setFill("red")
 

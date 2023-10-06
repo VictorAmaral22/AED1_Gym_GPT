@@ -5,6 +5,7 @@ from pages.loginCliente import LoginCliente
 from pages.criarConta import CriarConta
 from pages.homeCliente import HomeCliente
 from pages.homePersonal import HomePersonal
+from pages.createWorkout import CreateWorkout
 
 winW = 1920
 winH = 1000
@@ -14,15 +15,16 @@ win.setBackground("#000")
 
 exit = False
 loggedUser = False
+userViewing = False
 
 page = "initial"
+
+if loggedUser:
+    page = "home-personal"
 
 while not exit:
     if win.closed:
         break
-    
-    # print(page)
-    # print(loggedUser)
 
     if page == "exit":
         exit = True
@@ -84,6 +86,17 @@ while not exit:
     if page == "home-personal":
         leavePage = False
         returnedRender = HomePersonal(win, winW, winH, loggedUser, page, leavePage)
+        while not leavePage:
+            mouseClick = win.checkMouse()
+            tmp = returnedRender[0](mouseClick)
+            if tmp:
+                leavePage = tmp[1]
+                page = tmp[0]
+                userViewing = tmp[2]
+    
+    if page == "create-workout":
+        leavePage = False
+        returnedRender = CreateWorkout(win, winW, winH, loggedUser, page, leavePage, userViewing)
         while not leavePage:
             mouseClick = win.checkMouse()
             tmp = returnedRender[0](mouseClick)
