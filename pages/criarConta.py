@@ -1,6 +1,6 @@
 from render_functions import renderButton, checkClick, renderInput, renderImage
 from graphics import Text, Point
-from userInsert import userInsert
+from crudUsers import userInsert
 
 def CriarConta (win, winW, winH, page, leavePage):
     inputNome = renderInput (win, winW/2, winH/2-250, 20, 20, "Nome")

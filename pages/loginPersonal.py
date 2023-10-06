@@ -1,5 +1,5 @@
 from render_functions import renderButton, checkClick, renderInput, renderImage
-from verifyLogin import VerifyLogin
+from crudUsers import VerifyLogin
 from graphics import Text, Point
 
 def LoginPersonal (win, winW, winH, page, leavePage):
@@ -34,6 +34,7 @@ def LoginPersonal (win, winW, winH, page, leavePage):
                     tmpLeavePage = True
                     userLogged = login
                 else:
+                    warning.undraw()
                     warning.draw(win)                
             
             if exit:

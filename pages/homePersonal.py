@@ -1,6 +1,6 @@
 from render_functions import renderButton, checkClick, renderImage
-from treinoSearch import treinoSearch
-from treinoMostrar import createHTML
+from crudTreinos import treinoSearch
+from crudTreinos import createHTML
 from graphics import Text, Point
 
 def HomeCliente (win, winW, winH, idUser, page, leavePage):
@@ -26,6 +26,7 @@ def HomeCliente (win, winW, winH, idUser, page, leavePage):
                 if temTreino:
                     createHTML()
                 else:
+                    warning.undraw()
                     warning.draw(win)
 
 
