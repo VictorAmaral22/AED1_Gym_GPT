@@ -83,7 +83,7 @@ def CriarConta (win, winW, winH, page, leavePage):
                     else:
                         userLogged = validade
                         undraw()
-                        pageNew = "home-cliente"
+                        pageNew = "login-cliente"
                         tmpLeavePage = True        
 
             if exit:
