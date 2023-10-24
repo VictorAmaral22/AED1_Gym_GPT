@@ -1,6 +1,6 @@
 Id;Nome;Role;Email;Password,Height;Weight;Age
 1;adm;Personal;adm;12;170;100;50
-2;Vito;Cliente;v@gmail;123456;179;65;21
+2;Vito;Cliente;victor@gmail;123456;179;65;21
 3;Chris;Cliente;ch@gmail;194894;179;65;21
 4;Prisco;Cliente;prisco@gmail.com;1234546;170;60;30
 5;Johnny Silverhand;Cliente;js@gmail.com;123456;188;78;9000

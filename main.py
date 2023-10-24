@@ -7,8 +7,8 @@ from pages.homeCliente import HomeCliente
 from pages.homePersonal import HomePersonal
 from pages.createWorkout import CreateWorkout
 
-winW = 1280
-winH = 720
+winW = 1920
+winH = 1000
 
 win = GraphWin("Gym Rats", winW, winH)
 win.setBackground("#000")

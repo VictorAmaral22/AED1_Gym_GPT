@@ -7,6 +7,7 @@ from exercisesList import getExercises
 def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     winW2 = 500
     winH2 = 700
+    exercisesWindows = []
     bgImage = renderImage(win, winW/2, winH/2, "./assets/background.png")
     logo = renderImage(win, 110, 40, "./assets/logo-small.png")
     buttonReturn = renderImage(win, 30, 40, "./assets/arrow-left.png")
@@ -15,11 +16,6 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     title.setSize(30)
     title.draw(win)
     buttonSave = renderButton(win, winW-200, winH-100, "Salvar", "#00B4D8", "#fff", "#fff")
-
-    # userData = getUser(userViewing)
-    # exercicesA = getRoutineExercises("A")
-    # exercicesB = getRoutineExercises("B")
-    # exercicesC = getRoutineExercises("C")
 
     titleA = Text(Point(120, 220), "Treino A")
     titleA.setFill("#fff")
@@ -38,24 +34,6 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     titleC.setSize(25)
     titleC.draw(win)
     add3 = renderImage(win, 220, 380, "./assets/plus.png")
-    
-    # exercisesList = getExercises()
-    # usersButtons = []
-    
-    # startY = 280
-    # for exercise in exercisesList:
-    #     buttonGenWorkout = renderButton(win, 200, startY, exercise[1], "#00B4D8", "#fff", "#000")
-    #     usersButtons.append(buttonGenWorkout)
-    #     startY += 100
-
-
-    # win2 = GraphWin("Gym Rats", winW2, winH2)
-    # win2.setBackground("#000")
-
-    # print(userData)
-    # print(exercicesA)
-    # print(exercicesB)
-    # print(exercicesC)
 
     def undraw ():
         bgImage[2]()
@@ -63,6 +41,15 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
         buttonReturn[2]()
         buttonSave[3]()
         title.undraw()
+        titleA.undraw()
+        add1[2]()
+        titleB.undraw()
+        add2[2]()
+        titleC.undraw()
+        add3[2]()
+
+        for window in exercisesWindows:
+            window.close()
 
     def interactions(mouseclick):
         if mouseclick:
@@ -87,8 +74,13 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                 tmpLeavePage = True
 
             if clickAdd1:
+                for window in exercisesWindows:
+                    window.close()
+
                 win2 = GraphWin("Gym Rats - Treino A", winW2+500, winH2)
                 
+                exercisesWindows.append(win2)
+
                 for exercise in exercisesList:
                     if exercise[2] == "A":
                         buttonGenWorkout = renderButton(win2, startX, startY, exercise[1], "#00B4D8", "#fff", "#000")
@@ -100,9 +92,23 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                             startX += 330
                     
                 win2.setBackground("#000")
+
+                leaveSubPage = False
+                while not leaveSubPage:
+                    if win.closed:
+                        break
+
+                    clickSubWin = win.checkMouse()
+                    if clickSubWin:
+                        print(clickSubWin)
                 
             if clickAdd2:
+                for window in exercisesWindows:
+                    window.close()
+
                 win2 = GraphWin("Gym Rats - Treino B", winW2+500, winH2)
+
+                exercisesWindows.append(win2)
                 
                 for exercise in exercisesList:
                     if exercise[2] == "B":
@@ -115,9 +121,21 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                             startX += 330
                     
                 win2.setBackground("#000")
+
+                leaveSubPage = False
+                while not leaveSubPage:
+                    if win.closed:
+                        break
+
+                    clickSubWin = win.checkMouse()                        
                 
             if clickAdd3:
+                for window in exercisesWindows:
+                    window.close()
+                    
                 win2 = GraphWin("Gym Rats - Treino C", winW2+250, winH2)
+
+                exercisesWindows.append(win2)
                 
                 for exercise in exercisesList:
                     if exercise[2] == "C":
@@ -130,8 +148,16 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                             startX += 330
                     
                 win2.setBackground("#000")
+
+                leaveSubPage = False
+                while not leaveSubPage:
+                    if win.closed:
+                        break
+
+                    clickSubWin = win.checkMouse()
+                    if clickSubWin:
+                        print(clickSubWin)
                 
-            print(usersButtons)
             return [pageNew, tmpLeavePage, userToRedirect]
 
     return [
