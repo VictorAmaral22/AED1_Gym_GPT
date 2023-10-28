@@ -1,11 +1,44 @@
 from render_functions import checkClick, renderImage, renderInput
-# from crudTreinos import treinoSearch, createHTML, getRoutineExercises
 from graphics import Text, Point
-# from crudUsers import getUser
-# from exercisesList import getExercises
 from crudTreinos import getUserExercises
 
+folderTabA = False
+folderTabB = False
+folderTabC = False
+arrowLeft = False
+arrowRight = False
+paginationExercises = 1
+
+def tabClicked (win, tab):
+        global folderTabA
+        global folderTabB
+        global folderTabC
+        global page
+        
+        if folderTabA:
+            folderTabA[2]()
+            folderTabA = False
+        if folderTabB:
+            folderTabB[2]()
+            folderTabB = False
+        if folderTabC:
+            folderTabC[2]()
+            folderTabC = False
+        
+        if tab == "A":
+            folderTabA = renderImage(win, 215, 192, "./assets/treino-a-active.png")
+            page = 1
+        if tab == "B":            
+            folderTabB = renderImage(win, 460, 192, "./assets/treino-b-active.png")
+            page = 1
+        if tab == "C":
+            folderTabC = renderImage(win, 705, 192, "./assets/treino-c-active.png")
+            page = 1
+
 def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
+    global folderTabA
+    global folderTabB
+    global folderTabC
     exercisesList = getUserExercises(userViewing)
     bgImage = renderImage(win, winW/2, winH/2, "./assets/background.png")
     logo = renderImage(win, 110, 40, "./assets/logo-small.png")
@@ -13,16 +46,10 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     title = Text(Point(450, 40), "Gerencie o treino do cliente")
     title.setFill("#fff")
     title.setSize(30)
-    title.draw(win)
-    
+    title.draw(win)    
     folderExercices = renderImage(win, winW/2, winH/2+100, "./assets/exercices_folder.png")
     folderTop = renderImage(win, 459, 192, "./assets/treinos-folder.png")
-
     folderTabA = renderImage(win, 215, 192, "./assets/treino-a-active.png")
-    folderTabB = False
-    folderTabC = False
-
-    page = 1
     filteredExercices = []
 
     def filterExercises (workout, list):
@@ -37,42 +64,44 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     exercisesB = filterExercises("B", exercisesList)
     exercisesC = filterExercises("C", exercisesList)
 
-    def pagination (page, exercices, filteredList):
-        limit = page * 8
-        start = limit - 8
-        filteredList = exercices[start:limit]
-        return filteredList
+    def pagination (pageExerc, exercices):
+        global arrowLeft
+        global arrowRight
+        limit = pageExerc * 12
+        nextLimit = (pageExerc+1) * 12
+        start = limit - 12
+        
+        if arrowLeft:
+            arrowLeft[2]()
+            arrowLeft = False
+        if arrowRight:
+            arrowRight[2]()
+            arrowRight = False
 
-    filteredExercices = pagination(1, exercisesA, filteredExercices)
+        if pageExerc != 1:
+            arrowLeft = renderImage(win, winW/2-100, winH-60, "./assets/pagination-left.png")
+
+        if len(exercices[(nextLimit-12):nextLimit]) > 0:
+            arrowRight = renderImage(win, winW/2+100, winH-60, "./assets/pagination-right.png")
+
+        return exercices[start:limit]
+
+    filteredExercices = pagination(1, exercisesA)
+
+    inputsRendered = []
 
     def renderExercices (filteredList):
+        for input in inputsRendered:
+            input[2]()
+
         y = 300
 
         for exercise in filteredList:
-            exerciseName = renderInput(win, 300, y, 20, 20, "", "#fff", "#000", True, exercise[2])
+            exerciseName = renderInput(win, 390, y, 30, 20, "", "#fff", "#000", True, exercise[2])
+            inputsRendered.append(exerciseName)
             y += 50
 
     renderExercices(filteredExercices)
-
-    # buttonSave = renderButton(win, winW-200, winH-100, "Salvar", "#00B4D8", "#fff", "#fff")
-
-    # titleA = Text(Point(110, 220), "Treino A")
-    # titleA.setFill("#fff")
-    # titleA.setSize(25)
-    # titleA.draw(win)
-    # add1 = renderImage(win, 220, 220, "./assets/plus.png")
-    
-    # titleB = Text(Point(300, 220), "Treino B")
-    # titleB.setFill("#fff")
-    # titleB.setSize(25)
-    # titleB.draw(win)
-    # add2 = renderImage(win, 220, 300, "./assets/plus.png")
-    
-    # titleC = Text(Point(500, 220), "Treino C")
-    # titleC.setFill("#fff")
-    # titleC.setSize(25)
-    # titleC.draw(win)
-    # add3 = renderImage(win, 220, 380, "./assets/plus.png")
 
     def undraw ():
         bgImage[2]()
@@ -88,111 +117,82 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
             folderTabB[2]()
         if folderTabC:
             folderTabC[2]()
+        if arrowLeft:
+            arrowLeft[2]()
+        if arrowRight:
+            arrowRight[2]()
 
+        for input in inputsRendered:
+            input[2]()
+    
     def interactions(mouseclick):
+        global arrowLeft
+        global arrowRight
+        global paginationExercises
+
         if mouseclick:
             exit = checkClick(mouseclick, buttonReturn[1])
-            # clickAdd1 = checkClick(mouseclick, add1[1])
-            # clickAdd2 = checkClick(mouseclick, add2[1])
-            # clickAdd3 = checkClick(mouseclick, add3[1])
             pageNew = page
             tmpLeavePage = leavePage
             userToRedirect = False
-            
-            # startY = 50
-            # startX = 170
-            # usersButtons = []
-            # pageChange = 0            
+
+            clickedTabA = checkClick(mouseclick, [
+                Point(96.0, 162.0),
+                Point(334.0, 220.0)
+            ])
+            clickedTabB = checkClick(mouseclick, [
+                Point(341.0, 162.0),
+                Point(581.0, 220.0)
+            ])
+            clickedTabC = checkClick(mouseclick, [
+                Point(588.0, 162.0),
+                Point(826.0, 220.0)
+            ])
+
+            paginationLeft = False
+            if arrowLeft:
+                paginationLeft = checkClick(mouseclick, arrowLeft[1])
+
+            paginationRight = False
+            if arrowRight:
+                paginationRight = checkClick(mouseclick, arrowRight[1])
 
             if exit:
                 undraw()
                 pageNew = "home-personal"
                 tmpLeavePage = True
 
-            # if clickAdd1:
-            #     for window in exercisesWindows:
-            #         window.close()
+            if clickedTabA:
+                tabClicked(win, "A")
+                filteredExercices = pagination(1, exercisesA)
+                renderExercices(filteredExercices)
+            
+            if clickedTabB:
+                tabClicked(win, "B")
+                filteredExercices = pagination(1, exercisesB)
+                renderExercices(filteredExercices)
 
-            #     win2 = GraphWin("Gym Rats - Treino A", winW2+500, winH2)
-                
-            #     exercisesWindows.append(win2)
+            if clickedTabC:
+                tabClicked(win, "C")
+                filteredExercices = pagination(1, exercisesC)
+                renderExercices(filteredExercices)
 
-            #     for exercise in exercisesList:
-            #         if exercise[2] == "A":
-            #             buttonGenWorkout = renderButton(win2, startX, startY, exercise[1], "#00B4D8", "#fff", "#000")
-            #             usersButtons.append(buttonGenWorkout)
-            #             pageChange += 1
-            #             startY += 100
-            #             if pageChange%7 == 0:
-            #                 startY = 50
-            #                 startX += 330
-                    
-            #     win2.setBackground("#000")
+            if paginationLeft or paginationRight:
+                if paginationLeft:
+                    paginationExercises -= 1
+                if paginationRight:
+                    paginationExercises += 1
 
-            #     leaveSubPage = False
-            #     while not leaveSubPage:
-            #         if win.closed:
-            #             break
+                exercices = []
+                if folderTabA:
+                    exercices = exercisesA
+                if folderTabB:
+                    exercices = exercisesB
+                if folderTabC:
+                    exercices = exercisesC
 
-            #         clickSubWin = win.checkMouse()
-            #         if clickSubWin:
-            #             print(clickSubWin)
-                
-            # if clickAdd2:
-            #     for window in exercisesWindows:
-            #         window.close()
-
-            #     win2 = GraphWin("Gym Rats - Treino B", winW2+500, winH2)
-
-            #     exercisesWindows.append(win2)
-                
-            #     for exercise in exercisesList:
-            #         if exercise[2] == "B":
-            #             buttonGenWorkout = renderButton(win2, startX, startY, exercise[1], "#00B4D8", "#fff", "#000")
-            #             usersButtons.append(buttonGenWorkout)
-            #             pageChange += 1
-            #             startY += 100
-            #             if pageChange%7 == 0:
-            #                 startY = 50
-            #                 startX += 330
-                    
-            #     win2.setBackground("#000")
-
-            #     leaveSubPage = False
-            #     while not leaveSubPage:
-            #         if win.closed:
-            #             break
-
-            #         clickSubWin = win.checkMouse()                        
-                
-            # if clickAdd3:
-            #     for window in exercisesWindows:
-            #         window.close()
-                    
-            #     win2 = GraphWin("Gym Rats - Treino C", winW2+250, winH2)
-
-            #     exercisesWindows.append(win2)
-                
-            #     for exercise in exercisesList:
-            #         if exercise[2] == "C":
-            #             buttonGenWorkout = renderButton(win2, startX, startY, exercise[1], "#00B4D8", "#fff", "#000")
-            #             usersButtons.append(buttonGenWorkout)
-            #             pageChange += 1
-            #             startY += 100
-            #             if pageChange%7 == 0:
-            #                 startY = 50
-            #                 startX += 330
-                    
-            #     win2.setBackground("#000")
-
-            #     leaveSubPage = False
-            #     while not leaveSubPage:
-            #         if win.closed:
-            #             break
-
-            #         clickSubWin = win.checkMouse()
-            #         if clickSubWin:
-            #             print(clickSubWin)
+                filteredExercices = pagination(paginationExercises, exercices)
+                renderExercices(filteredExercices)                
                 
             return [pageNew, tmpLeavePage, userToRedirect]
 
