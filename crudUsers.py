@@ -15,11 +15,11 @@ def VerifyLogin (email, password, type):
     return login
 
 def userInsert(name, role, email, password, height, weight, age):
-    with open("./data/users.csv", 'r') as x:
+    with open("./data/users.csv", 'r', newline='', encoding="utf-8") as x:
         cont = len(x.readlines())
     x.close()
 
-    lines = open("./data/users.csv", 'r')
+    lines = open("./data/users.csv", 'r', newline='', encoding="utf-8")
     lines = lines.readlines()
     validate = True
 
@@ -31,14 +31,14 @@ def userInsert(name, role, email, password, height, weight, age):
         infos = ""
         infos = str(cont)+";"+name+";"+role+";"+email+";"+password+";"+height+";"+weight+";"+age+"\n"
         validate = cont
-        arq = open("./data/users.csv", "a")
+        arq = open("./data/users.csv", "a", newline='', encoding="utf-8")
         arq.write(infos)
 
     return validate
 
 def getUsersWithNoWorkouts ():
-    usersArq = open("./data/users.csv", "r")
-    workoutsArq = open("./data/treinos.csv", "r")
+    usersArq = open("./data/users.csv", "r", newline='', encoding="utf-8")
+    workoutsArq = open("./data/treinos.csv", "r", newline='', encoding="utf-8")
     usersArq.readline()
     workoutsArq.readline()
 
@@ -64,8 +64,21 @@ def getUsersWithNoWorkouts ():
 
     return usersList
 
+def getClients ():
+    usersArq = open("./data/users.csv", "r", newline='', encoding="utf-8")
+    usersArq.readline()
+    users = csvLinesFormatter(usersArq.readlines())
+
+    usersList = []
+
+    for user in users:
+        if user[2] == "Cliente":
+            usersList.append(user)
+
+    return usersList
+
 def getUser (id):
-    usersArq = open("./data/users.csv", "r")
+    usersArq = open("./data/users.csv", "r", newline='', encoding="utf-8")
     usersArq.readline()
     users = csvLinesFormatter(usersArq.readlines())
 

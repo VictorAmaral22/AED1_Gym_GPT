@@ -1,7 +1,7 @@
 from render_functions import renderButton, checkClick, renderImage
 from crudTreinos import treinoSearch, createHTML
 from graphics import Text, Point
-from crudUsers import getUsersWithNoWorkouts
+from crudUsers import getUsersWithNoWorkouts, getClients
 
 def HomePersonal (win, winW, winH, idUser, page, leavePage):
     bgImage = renderImage(win, winW/2, winH/2, "./assets/background.png")
@@ -17,7 +17,7 @@ def HomePersonal (win, winW, winH, idUser, page, leavePage):
     subTitle.setSize(20)
     subTitle.draw(win)
 
-    usersWithNoWorkouts = getUsersWithNoWorkouts()
+    usersWithNoWorkouts = getClients()
     usersButtons = []
 
     startY = 280

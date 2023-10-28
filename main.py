@@ -14,7 +14,7 @@ win = GraphWin("Gym Rats", winW, winH)
 win.setBackground("#000")
 
 exit = False
-loggedUser = False
+loggedUser = 1
 userViewing = False
 
 page = "initial"

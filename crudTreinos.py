@@ -3,8 +3,8 @@ import os
 from utils import csvLinesFormatter
 
 def treinoInsert(email):
-    arq = open("./data/users.csv", 'r')
-    arq2 = open("treinosAluno.csv", 'r')
+    arq = open("./data/users.csv", 'r', newline='', encoding="utf-8")
+    arq2 = open("treinosAluno.csv", 'r', newline='', encoding="utf-8")
     lines2 = arq2.readlines()
     lines = arq.readlines()
 
@@ -38,11 +38,11 @@ def treinoInsert(email):
 
     print(insert)
 
-    arq2 = open("treinosAluno.csv", "a")
+    arq2 = open("treinosAluno.csv", "a", newline='', encoding="utf-8")
     arq2.write(insert+"\n")
 
 def createHTML():
-    arq = open("./data/ficha.csv", "r")
+    arq = open("./data/ficha.csv", "r", newline='', encoding="utf-8")
     ficha = arq.readlines()
     treinoA = []
     treinoB = []
@@ -118,12 +118,12 @@ def createHTML():
 
     data = header+content+footer
 
-    html = open("index.html", "w")
+    html = open("index.html", "w", newline='', encoding="utf-8")
     html.write(data)
     webbrowser.open('file://' + os.path.realpath("index.html"))
 
 def treinoSearch(idUser):
-    treinos = open("./data/treinos.csv", "r")
+    treinos = open("./data/treinos.csv", "r", newline='', encoding="utf-8")
     treinos.readline()
     treinosList = treinos.readlines()
 
@@ -140,7 +140,7 @@ def treinoSearch(idUser):
     for i in ficha:
         new += ";".join(i)+"\n"
             
-    workout = open("./data/ficha.csv", "w")
+    workout = open("./data/ficha.csv", "w", newline='', encoding="utf-8")
     workout.write(new)
 
     if new != "":
@@ -149,8 +149,8 @@ def treinoSearch(idUser):
         return False
     
 def update(email):
-    arq = open("treinosAluno.csv", "r")
-    arq3 = open("./data/users.csv", "r")
+    arq = open("treinosAluno.csv", "r", newline='', encoding="utf-8")
+    arq3 = open("./data/users.csv", "r", newline='', encoding="utf-8")
     lines3 = arq3.readlines()
     lines = arq.readlines()
 
@@ -178,7 +178,7 @@ def update(email):
 
     del lines[cont]
 
-    new_arq = open("treinosAluno.csv", "w+")
+    new_arq = open("treinosAluno.csv", "w+", newline='', encoding="utf-8")
 
     for line in lines:
         new_arq.write(line)
@@ -199,14 +199,14 @@ def update(email):
 
     print(insert)
 
-    arq2 = open("treinosAluno.csv", "a")
+    arq2 = open("treinosAluno.csv", "a", newline='', encoding="utf-8")
     arq2.write(insert+"\n")
 
     new_arq.close()
 
 def getRoutineExercises (day):
     # day = "A", "B" ou "C"
-    arq = open("./data/lista-exercicios.csv", "r")
+    arq = open("./data/lista-exercicios.csv", "r", newline='', encoding="utf-8")
     arq.readline()
     lines = csvLinesFormatter(arq.readlines())
 
@@ -215,5 +215,16 @@ def getRoutineExercises (day):
     for exerc in lines:
         if exerc[2] == day:
             exercises.append(exerc)
+
+    return exercises
+
+def getUserExercises (idUser):
+    hasWorkout = treinoSearch(idUser)
+    exercises = []
+
+    if hasWorkout:
+        arq = open("./data/ficha.csv", "r", newline='', encoding="utf-8")
+        arq.readline()
+        exercises = csvLinesFormatter(arq.readlines())
 
     return exercises
