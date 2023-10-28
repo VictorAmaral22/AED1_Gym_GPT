@@ -36,24 +36,32 @@ def renderButton (win, posW, posH, title, bgColor="#001d3d", txtColor="#fff", ou
         draw
     ]
 
-def renderInput (win, posW, posH, inputW=20, fontSize=20, label="Insira um texto", inputFill="#fff", txtColor="#fff"):
+def renderInput (win, posW, posH, inputW=20, fontSize=20, label="Insira um texto", inputFill="#fff", txtColor="#fff", disabled=False, value=False):
     input = Entry(Point(posW, posH), inputW)
     input.draw(win)
     input.setFill(inputFill)
     input.setSize(fontSize)
-    txt = Text(Point(posW, posH-30), label)
-    txt.setFill(txtColor)
-    txt.draw(win)
 
+    if value:
+        input.setText(value)
+
+    txt = False
+    if label != "":
+        txt = Text(Point(posW, posH-30), label)
+        txt.setFill(txtColor)
+        txt.draw(win)
+    
     corners = []
 
     def undraw ():
         input.undraw()
-        txt.undraw()
+        if txt:
+            txt.undraw()
 
     def draw ():
         input.draw(win)
-        txt.draw(win)
+        if txt:
+            txt.draw(win)
 
     return [
         input,

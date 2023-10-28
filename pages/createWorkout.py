@@ -1,13 +1,12 @@
-from render_functions import renderButton, checkClick, renderImage
-from crudTreinos import treinoSearch, createHTML, getRoutineExercises
-from graphics import GraphWin, Text, Point
-from crudUsers import getUser
-from exercisesList import getExercises
-from crudTreinos import treinoSearch, getUserExercises
+from render_functions import checkClick, renderImage, renderInput
+# from crudTreinos import treinoSearch, createHTML, getRoutineExercises
+from graphics import Text, Point
+# from crudUsers import getUser
+# from exercisesList import getExercises
+from crudTreinos import getUserExercises
 
 def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     exercisesList = getUserExercises(userViewing)
-    exercisesWindows = []
     bgImage = renderImage(win, winW/2, winH/2, "./assets/background.png")
     logo = renderImage(win, 110, 40, "./assets/logo-small.png")
     buttonReturn = renderImage(win, 30, 40, "./assets/arrow-left.png")
@@ -23,7 +22,37 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     folderTabB = False
     folderTabC = False
 
-    print(exercisesList)
+    page = 1
+    filteredExercices = []
+
+    def filterExercises (workout, list):
+        filtered = []
+        for exercise in list:
+            if exercise[1] == workout:
+                filtered.append(exercise)
+
+        return filtered
+    
+    exercisesA = filterExercises("A", exercisesList)
+    exercisesB = filterExercises("B", exercisesList)
+    exercisesC = filterExercises("C", exercisesList)
+
+    def pagination (page, exercices, filteredList):
+        limit = page * 8
+        start = limit - 8
+        filteredList = exercices[start:limit]
+        return filteredList
+
+    filteredExercices = pagination(1, exercisesA, filteredExercices)
+
+    def renderExercices (filteredList):
+        y = 300
+
+        for exercise in filteredList:
+            exerciseName = renderInput(win, 300, y, 20, 20, "", "#fff", "#000", True, exercise[2])
+            y += 50
+
+    renderExercices(filteredExercices)
 
     # buttonSave = renderButton(win, winW-200, winH-100, "Salvar", "#00B4D8", "#fff", "#fff")
 
@@ -59,16 +88,6 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
             folderTabB[2]()
         if folderTabC:
             folderTabC[2]()
-        # buttonSave[3]()
-        # titleA.undraw()
-        # titleB.undraw()
-        # titleC.undraw()
-        # add1[2]()
-        # add2[2]()
-        # add3[2]()
-
-        for window in exercisesWindows:
-            window.close()
 
     def interactions(mouseclick):
         if mouseclick:
@@ -80,11 +99,10 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
             tmpLeavePage = leavePage
             userToRedirect = False
             
-            startY = 50
-            startX = 170
-            usersButtons = []
-            pageChange = 0
-            
+            # startY = 50
+            # startX = 170
+            # usersButtons = []
+            # pageChange = 0            
 
             if exit:
                 undraw()
