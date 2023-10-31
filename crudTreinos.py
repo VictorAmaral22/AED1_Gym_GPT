@@ -2,44 +2,25 @@ import webbrowser
 import os
 from utils import csvLinesFormatter
 
-def treinoInsert(email):
-    arq = open("./data/users.csv", 'r', newline='', encoding="utf-8")
-    arq2 = open("treinosAluno.csv", 'r', newline='', encoding="utf-8")
-    lines2 = arq2.readlines()
+def treinoInsert(id, newExercises):
+    arq = open("./data/treinos.csv", 'r', newline='', encoding="utf-8")
+    heading = arq.readline()
     lines = arq.readlines()
+    lines = csvLinesFormatter(lines)
 
-    test = ""
+    tmpLines = []
+    for row in lines:
+        if row[0] != id:
+            tmpLines.append(";".join(row))
 
-    for i in lines:
-        if email in i:
-            for word in i:
-                if word == ';':
-                    break
-                test += word
-            
-    for k in lines2:
-        if "ID_"+test in k:
-            print("Este usuário ja possuí um treino!")
-            exit()
-            
-    id = "ID_"+test
+    for row in newExercises:
+        tmpLines.append(";".join(row))
+    
+    tmpLines = "\n".join(tmpLines)
 
-    insert = id+";"
-
-    while True:
-        ex = str(input("Insira o nome do exercício: "))
-        if ex == "0" or ex == 0:
-            break
-        ser = str(input("Insira a quantidade de series: "))
-        rep = str(input("Insira a quantidade de repetições: "))
-        insert += ex+ ";"+ ser + ";"+ rep + ";"
-
-    insert = insert.rstrip(insert[-1])
-
-    print(insert)
-
-    arq2 = open("treinosAluno.csv", "a", newline='', encoding="utf-8")
-    arq2.write(insert+"\n")
+    arq2 = open("./data/treinos.csv", "w", newline='', encoding="utf-8")
+    arq2.write(heading+tmpLines+"\n")
+    arq2.close()
 
 def createHTML():
     arq = open("./data/ficha.csv", "r", newline='', encoding="utf-8")
@@ -77,7 +58,7 @@ def createHTML():
             </thead>'''
     for treino in treinoA:
         content += "<tr>\n"
-        for exerc in treino[2:]:
+        for exerc in treino[3:]:
             content += f"<td>{exerc.strip()}</td>\n"
         content += "</tr>\n"
     content += "</table>"
@@ -92,7 +73,7 @@ def createHTML():
             </thead>'''
     for treino in treinoB:
         content += "<tr>\n"
-        for exerc in treino[2:]:
+        for exerc in treino[3:]:
             content += f"<td>{exerc.strip()}</td>\n"
         content += "</tr>\n"
     content += "</table>"
@@ -107,7 +88,7 @@ def createHTML():
             </thead>'''
     for treino in treinoC:
         content += "<tr>\n"
-        for exerc in treino[2:]:
+        for exerc in treino[3:]:
             content += f"<td>{exerc.strip()}</td>\n"
         content += "</tr>\n"
     content += "</table>"
@@ -216,6 +197,14 @@ def getRoutineExercises (day):
         if exerc[2] == day:
             exercises.append(exerc)
 
+    return exercises
+
+def getAllExercises ():
+    exercises = []
+    arq = open("./data/lista-exercicios.csv", "r", newline='', encoding="utf-8")
+    arq.readline()
+    exercises = csvLinesFormatter(arq.readlines())
+    
     return exercises
 
 def getUserExercises (idUser):

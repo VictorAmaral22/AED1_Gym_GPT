@@ -1,5 +1,5 @@
-from render_functions import checkClick, renderImage, renderInput, renderTxt
-from graphics import Text, Point
+from render_functions import checkClick, renderImage, renderTxt
+from graphics import Point
 from crudUsers import getUsersWithNoWorkouts, getUsersWithWorkouts
 
 folderTabNoWorkout = False
@@ -206,6 +206,7 @@ def HomePersonal (win, winW, winH, idUser, page, leavePage):
                 renderUsers(filteredExercices)         
             
             c = 0
+
             for user in inputsRendered:
                 clicked = checkClick(mouseclick, user[2][1])
 

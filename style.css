@@ -18,3 +18,11 @@ td, th {
     border: solid;
     border-color: rgb(98, 0, 210);
 }
+
+td, th {
+    padding: 15px;
+}
+
+h1 {
+    text-align: center;
+}

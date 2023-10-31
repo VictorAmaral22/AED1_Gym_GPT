@@ -19,13 +19,10 @@ win = GraphWin("Gym Rats", winW, winH)
 win.setBackground("#000")
 
 exit = False
-loggedUser = 1
+loggedUser = False
 userViewing = False
 
 page = "initial"
-
-if loggedUser:
-    page = "home-personal"
 
 while not exit:
     if win.closed:
