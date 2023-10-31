@@ -8,6 +8,11 @@ folderTabC = False
 arrowLeft = False
 arrowRight = False
 paginationExercises = 1
+inputsRendered = []
+exercisesList = []
+exercisesA = []
+exercisesB = []
+exercisesC = []
 
 def tabClicked (win, tab):
         global folderTabA
@@ -35,10 +40,20 @@ def tabClicked (win, tab):
             folderTabC = renderImage(win, 705, 192, "./assets/treino-c-active.png")
             page = 1
 
+def saveWorkout (exercises, user):
+    print(exercises)
+    print(user)
+
 def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     global folderTabA
     global folderTabB
     global folderTabC
+    global inputsRendered
+    global exercisesList
+    global exercisesA
+    global exercisesB
+    global exercisesC
+
     exercisesList = getUserExercises(userViewing)
     bgImage = renderImage(win, winW/2, winH/2, "./assets/background.png")
     logo = renderImage(win, 110, 40, "./assets/logo-small.png")
@@ -50,6 +65,11 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     folderExercices = renderImage(win, winW/2, winH/2+100, "./assets/exercices_folder.png")
     folderTop = renderImage(win, 459, 192, "./assets/treinos-folder.png")
     folderTabA = renderImage(win, 215, 192, "./assets/treino-a-active.png")
+    titleName = renderTxt(win, 215, 270, "#fff", "Exercício", 20)
+    titleSerie = renderTxt(win, 660, 270, "#fff", "Séries", 20)
+    titleRep = renderTxt(win, 850, 270, "#fff", "Repetições", 20)
+    buttonSave = renderImage(win, winW-350, winH-80, "./assets/save-workout.png")
+
     filteredExercices = []
 
     def filterExercises (workout, list):
@@ -67,9 +87,10 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     def pagination (pageExerc, exercices):
         global arrowLeft
         global arrowRight
-        limit = pageExerc * 12
-        nextLimit = (pageExerc+1) * 12
-        start = limit - 12
+        itemsPerPage = 8
+        limit = pageExerc * itemsPerPage
+        nextLimit = (pageExerc+1) * itemsPerPage
+        start = limit - itemsPerPage
         
         if arrowLeft:
             arrowLeft[2]()
@@ -81,48 +102,44 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
         if pageExerc != 1:
             arrowLeft = renderImage(win, winW/2-100, winH-60, "./assets/pagination-left.png")
 
-        if len(exercices[(nextLimit-12):nextLimit]) > 0:
+        if len(exercices[(nextLimit-itemsPerPage):nextLimit]) > 0:
             arrowRight = renderImage(win, winW/2+100, winH-60, "./assets/pagination-right.png")
 
         return exercices[start:limit]
 
     filteredExercices = pagination(1, exercisesA)
 
-    inputsRendered = []
-
     def renderExercices (filteredList):
-        for input in inputsRendered:
-            input[2]()
+        global inputsRendered
 
-        y = 310
+        for input in inputsRendered:
+            input[1][0][2]()
+            input[1][1][1]()
+            input[2][2]()
+            input[3][2]()
+            input[4][2]()
+        
+        inputsRendered = []
+        y = 350
 
         for exercise in filteredList:
-            titleNome = renderTxt(win, 215, 270, "#fff", "Exercício", 20)
-            exerciseName = renderInput(win, 390, y, 30, 20, "", "#fff", "#000", True, exercise[2])
-            inputsRendered.append(exerciseName)
-            
-            titleEmail = renderTxt(win, 660, 270, "#fff", "Séries", 20)
-            exerciseSerie = renderInput(win, 700, y, 10, 20, "", "#fff", "#000", True, exercise[3])
-            inputsRendered.append(exerciseSerie)
-            
-            titleHeight = renderTxt(win, 850, 270, "#fff", "Repetições", 20)
-            exerciseRep = renderInput(win, 860, y, 10, 20, "", "#fff", "#000", True, exercise[4])
-            inputsRendered.append(exerciseRep)
+            exerciseNameImage = renderImage(win, 350, y, "./assets/input-big.png")
+            exerciseNameTxt = renderTxt(win, 350, y, "#000", exercise[3], 20)
+
+            exerciseSerie = renderInput(win, 700, y, 10, 20, "", "#fff", "#000", True, exercise[4])            
+            exerciseRep = renderInput(win, 860, y, 10, 20, "", "#fff", "#000", True, exercise[5])
+
+            enterImage = renderImage(win, 1600, y, "./assets/trash.png")
+
+            inputsRendered.append([
+                exercise[2],
+                [exerciseNameImage, exerciseNameTxt],
+                exerciseSerie,
+                exerciseRep,
+                enterImage,
+            ])
                                     
-            # nameImage = renderImage(win, 350, y, "./assets/input-big.png")
-            # nameTxt = renderTxt(win, 350, y, "#000", exercise[2], 20)
-            
-            # serieImage = renderImage(win, 800, y, "./assets/input-big.png")
-            # serieTxt = renderTxt(win, 800, y, "#000", exercise[3], 20)
-            
-            # repsImage = renderImage(win, 1250, y, "./assets/input-big.png")
-            # repsTxt = renderTxt(win, 1250, y, "#000", exercise[4], 20)
-
-            # enterImage = renderImage(win, 1600, y, "./assets/open.png")
-
-            
-
-            y += 50
+            y += 70
 
     renderExercices(filteredExercices)
 
@@ -145,15 +162,34 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
         if arrowRight:
             arrowRight[2]()
 
+        titleName[1]()
+        titleSerie[1]()
+        titleRep[1]()
+
         for input in inputsRendered:
-            input[2]()
+            input[1][0][2]()
+            input[1][1][1]()
+            input[2][2]()
+            input[3][2]()
+            input[4][2]()
     
     def interactions(mouseclick):
         global arrowLeft
         global arrowRight
         global paginationExercises
+        global inputsRendered
+        global exercisesList
+        global exercisesA
+        global exercisesB
+        global exercisesC
+        global folderTabA
+        global folderTabB
+        global folderTabC
+        global filteredExercices
 
         if mouseclick:
+            print("exercisesList",exercisesList)
+
             exit = checkClick(mouseclick, buttonReturn[1])
             pageNew = page
             tmpLeavePage = leavePage
@@ -172,6 +208,8 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                 Point(826.0, 220.0)
             ])
 
+            clickedSave = checkClick(mouseclick, buttonSave[1])
+
             paginationLeft = False
             if arrowLeft:
                 paginationLeft = checkClick(mouseclick, arrowLeft[1])
@@ -189,15 +227,15 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                 tabClicked(win, "A")
                 filteredExercices = pagination(1, exercisesA)
                 renderExercices(filteredExercices)
-                cont = 0
-                for i in range(0, len(inputsRendered)//3):
-                    exer = inputsRendered[cont][0].getText()
-                    cont+=1
-                    serie = inputsRendered[cont][0].getText()
-                    cont+=1
-                    rep = inputsRendered[cont][0].getText()
-                    cont+=1
-                    print(str(userViewing)+";"+exer+";"+serie+";"+rep)
+                # cont = 0
+                # for i in range(0, len(inputsRendered)//3):
+                #     exer = inputsRendered[cont][0].getText()
+                #     cont+=1
+                #     serie = inputsRendered[cont][0].getText()
+                #     cont+=1
+                #     rep = inputsRendered[cont][0].getText()
+                #     cont+=1
+                #     print(str(userViewing)+";"+exer+";"+serie+";"+rep)
             
             if clickedTabB:
                 tabClicked(win, "B")
@@ -208,6 +246,36 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                 tabClicked(win, "C")
                 filteredExercices = pagination(1, exercisesC)
                 renderExercices(filteredExercices)
+
+            if clickedSave:
+                saveWorkout(exercisesList, userViewing)
+
+            for exercise in inputsRendered:
+                clicked = checkClick(mouseclick, exercise[4][1])
+
+                if clicked:
+                    tmpExercisesList = []
+                    for exerc in exercisesList:
+                        if(exerc[2] != exercise[0]):
+                            tmpExercisesList.append(exerc)
+
+                    exercisesList = tmpExercisesList
+
+                    if folderTabA:
+                        tmpArr = filterExercises("A", tmpExercisesList)
+                        exercisesA = tmpArr
+                        filteredExercices = pagination(paginationExercises, tmpArr)
+                    if folderTabB:
+                        tmpArr = filterExercises("B", tmpExercisesList)
+                        exercisesB = tmpArr
+                        filteredExercices = pagination(paginationExercises, tmpArr)
+                    if folderTabC:
+                        tmpArr = filterExercises("C", tmpExercisesList)
+                        exercisesC = tmpArr
+                        filteredExercices = pagination(paginationExercises, tmpArr)
+
+                    renderExercices(filteredExercices)
+                    break               
 
             if paginationLeft or paginationRight:
                 if paginationLeft:

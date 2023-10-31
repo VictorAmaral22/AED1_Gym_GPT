@@ -225,6 +225,5 @@ def getUserExercises (idUser):
 
     if hasWorkout:
         arq = open("./data/ficha.csv", "r", newline='', encoding="utf-8")
-        arq.readline()
         exercises = csvLinesFormatter(arq.readlines())
     return exercises

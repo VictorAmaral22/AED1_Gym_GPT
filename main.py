@@ -7,20 +7,25 @@ from pages.homeCliente import HomeCliente
 from pages.homePersonal import HomePersonal
 from pages.createWorkout import CreateWorkout
 
-winW = 1366
-winH = 768
+# Resolução do Chris
+# winW = 1366
+# winH = 768
+
+# Resolução Vitão 
+winW = 1920
+winH = 1000
 
 win = GraphWin("Gym Rats", winW, winH)
 win.setBackground("#000")
 
 exit = False
-loggedUser = 2 
+loggedUser = 1
 userViewing = False
 
 page = "initial"
 
 if loggedUser:
-    page = "create-workout"
+    page = "home-personal"
 
 while not exit:
     if win.closed:
@@ -96,7 +101,7 @@ while not exit:
     
     if page == "create-workout":
         leavePage = False
-        returnedRender = CreateWorkout(win, winW, winH, loggedUser, page, leavePage, 2)
+        returnedRender = CreateWorkout(win, winW, winH, loggedUser, page, leavePage, userViewing)
         while not leavePage:
             mouseClick = win.checkMouse()
             tmp = returnedRender[0](mouseClick)
