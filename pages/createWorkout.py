@@ -1,4 +1,4 @@
-from render_functions import checkClick, renderImage, renderInput
+from render_functions import checkClick, renderImage, renderInput, renderTxt
 from graphics import Text, Point
 from crudTreinos import getUserExercises
 
@@ -94,11 +94,34 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
         for input in inputsRendered:
             input[2]()
 
-        y = 300
+        y = 310
 
         for exercise in filteredList:
+            titleNome = renderTxt(win, 215, 270, "#fff", "Exercício", 20)
             exerciseName = renderInput(win, 390, y, 30, 20, "", "#fff", "#000", True, exercise[2])
             inputsRendered.append(exerciseName)
+            
+            titleEmail = renderTxt(win, 660, 270, "#fff", "Séries", 20)
+            exerciseSerie = renderInput(win, 700, y, 10, 20, "", "#fff", "#000", True, exercise[3])
+            inputsRendered.append(exerciseSerie)
+            
+            titleHeight = renderTxt(win, 850, 270, "#fff", "Repetições", 20)
+            exerciseRep = renderInput(win, 860, y, 10, 20, "", "#fff", "#000", True, exercise[4])
+            inputsRendered.append(exerciseRep)
+                                    
+            # nameImage = renderImage(win, 350, y, "./assets/input-big.png")
+            # nameTxt = renderTxt(win, 350, y, "#000", exercise[2], 20)
+            
+            # serieImage = renderImage(win, 800, y, "./assets/input-big.png")
+            # serieTxt = renderTxt(win, 800, y, "#000", exercise[3], 20)
+            
+            # repsImage = renderImage(win, 1250, y, "./assets/input-big.png")
+            # repsTxt = renderTxt(win, 1250, y, "#000", exercise[4], 20)
+
+            # enterImage = renderImage(win, 1600, y, "./assets/open.png")
+
+            
+
             y += 50
 
     renderExercices(filteredExercices)
@@ -166,6 +189,15 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                 tabClicked(win, "A")
                 filteredExercices = pagination(1, exercisesA)
                 renderExercices(filteredExercices)
+                cont = 0
+                for i in range(0, len(inputsRendered)//3):
+                    exer = inputsRendered[cont][0].getText()
+                    cont+=1
+                    serie = inputsRendered[cont][0].getText()
+                    cont+=1
+                    rep = inputsRendered[cont][0].getText()
+                    cont+=1
+                    print(str(userViewing)+";"+exer+";"+serie+";"+rep)
             
             if clickedTabB:
                 tabClicked(win, "B")
