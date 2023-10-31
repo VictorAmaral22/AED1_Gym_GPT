@@ -102,3 +102,21 @@ def renderImage (win, posW, posH, imagePath):
         undraw,
         draw
     ]
+
+def renderTxt (win, posW, posH, color, content, size):
+    txt = Text(Point(posW, posH), content)
+    txt.setFill(color)
+    txt.setSize(size)
+    txt.draw(win)  
+
+    def undraw ():
+        txt.undraw()
+
+    def draw ():
+        txt.draw(win)
+
+    return [
+        txt,
+        undraw,
+        draw
+    ]

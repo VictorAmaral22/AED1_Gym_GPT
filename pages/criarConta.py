@@ -3,19 +3,23 @@ from graphics import Text, Point
 from crudUsers import userInsert
 
 def CriarConta (win, winW, winH, page, leavePage):
-    inputNome = renderInput (win, winW/2, winH/2-250, 20, 20, "Nome")
-    inputEmail = renderInput (win, winW/2, winH/2-180, 20, 20, "Email")
-    inputSenha = renderInput (win, winW/2, winH/2-110, 20, 20, "Senha")
-    inputAltura = renderInput (win, winW/2, winH/2-40, 20, 20, "Altura")
-    inputPeso = renderInput (win, winW/2, winH/2+30, 20, 20, "Peso")
-    inputIdade = renderInput (win, winW/2, winH/2+100, 20, 20, "Idade")
-    buttonCriar = renderButton(win, winW/2, winH/2+250, "Cadastrar")
+    bgImage = renderImage(win, winW/2, winH/2, "./assets/background-login.png")
+    logo = renderImage(win, winW/2-400, winH/2, "./assets/gym-rats-logo.png")
+    inputNome = renderInput (win, winW-250, winH/2-250, 20, 20, "Nome", "#fff", "#000")
+    inputEmail = renderInput (win, winW-250, winH/2-180, 20, 20, "Email", "#fff", "#000")
+    inputSenha = renderInput (win, winW-250, winH/2-110, 20, 20, "Senha", "#fff", "#000")
+    inputAltura = renderInput (win, winW-250, winH/2-40, 20, 20, "Altura", "#fff", "#000")
+    inputPeso = renderInput (win, winW-250, winH/2+30, 20, 20, "Peso", "#fff", "#000")
+    inputIdade = renderInput (win, winW-250, winH/2+100, 20, 20, "Idade", "#fff", "#000")
+    buttonCriar = renderButton(win, winW-250, winH/2+250, "Cadastrar")
 
     buttonReturn = renderImage(win, 30, 40, "./assets/arrow-left.png")
     warning = Text(Point(winW/2, winH/2+170), "Valores errados")
     warning.setFill("red")
 
     def undraw ():
+        bgImage[2]()
+        logo[2]()
         inputNome[2]()
         inputEmail[2]()
         inputSenha[2]()
