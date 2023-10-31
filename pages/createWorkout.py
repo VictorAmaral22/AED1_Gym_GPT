@@ -144,6 +144,8 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
     renderExercices(filteredExercices)
 
     def undraw ():
+        global inputsRendered
+
         bgImage[2]()
         logo[2]()
         folderExercices[2]()
