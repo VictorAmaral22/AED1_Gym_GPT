@@ -56,9 +56,6 @@ def renderExercices (win, filteredList, add=False):
     global inputsRendered
     global inputsRenderedNew
 
-    print("add ",add)
-    print("filteredList ",filteredList)
-
     for input in inputsRendered:
         input[1][0][2]()
         input[1][1][1]()
@@ -285,7 +282,7 @@ def CreateWorkout (win, winW, winH, idUser, page, leavePage, userViewing):
                 Point(826.0, 220.0)
             ])
             clickedTabNew = checkClick(mouseclick, buttonAdd[1])
-            print("mouseclick ",mouseclick)
+            
             clickedSave = checkClick(mouseclick, [
                 Point(225.0, 916.0),
                 Point(474.0, 960.0)

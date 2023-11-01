@@ -21,7 +21,6 @@ win.setBackground("#000")
 exit = False
 loggedUser = False
 userViewing = False
-
 page = "initial"
 
 while not exit:

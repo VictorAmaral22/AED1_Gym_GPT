@@ -2,8 +2,22 @@ User;Treino;Exercício_Id;Exercício;Séries;Repetições
 3;A;1;Supino Reto com Barra;4;12
 3;B;21;Barra Fixa Pronada;4;12
 3;C;39;Leg Press;4;12
-8;A;1;Supino Reto com Barra;4;12
-8;A;9;Tríceps Paralela;4;12
-8;B;26;Puxada Alta na Polia Supinada;4;12
-2;A;1;Supino Reto com Barra;4;Até a falha
+7;A;5;Flexão;3;12
+7;A;3;Supino Inclinado com Barra;4;12
+7;A;8;Tríceps Corda;4;12
+7;A;13;Desenvolvimento com Halteres;3;At´e morrer
+7;A;12;Tríceps Francês;4;12
+7;A;15;Elevação Lateral com Halteres;4;12
+7;B;25;Puxada Alta na Polia Pronada;4;12
+7;B;23;Remada Baixa;4;12
+7;B;29;Remada Cerrote;4;12
+7;C;40;Agachamento Livre;4;12
+7;C;39;Leg Press;4;12
+7;B;36;Rosca 21 com Barra W;4;12
+7;B;37;Abdominais;4;12
+7;C;45;Cadeira Flexora;4;12
+8;A;1;Supino Reto com Barra;4;At´e a falha
+8;B;37;Abdominais;4;12
 2;A;2;Supino Reto com Halteres;4;12
+2;B;23;Remada Baixa;72;12
+2;C;47;Stiff;10;12

@@ -152,7 +152,7 @@ def update(email):
 
     for i in lines:
         if id in i:
-            print(i)
+
             break
         cont += 1
         
@@ -177,8 +177,6 @@ def update(email):
         insert += ex+ ";"+ ser + ";"+ rep + ";"
 
     insert = insert.rstrip(insert[-1])
-
-    print(insert)
 
     arq2 = open("treinosAluno.csv", "a", newline='', encoding="utf-8")
     arq2.write(insert+"\n")
@@ -209,7 +207,6 @@ def getAllExercises ():
 
 def getUserExercises (idUser):
     hasWorkout = treinoSearch(idUser)
-    print(idUser)
     exercises = []
 
     if hasWorkout:

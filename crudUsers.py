@@ -45,9 +45,6 @@ def getUsersWithNoWorkouts ():
     users = csvLinesFormatter(usersArq.readlines())
     workouts = csvLinesFormatter(workoutsArq.readlines())
 
-    # print(users)
-    # print(workouts)
-
     usersList = []
 
     for user in users:
